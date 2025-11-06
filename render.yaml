@@ -3,7 +3,6 @@ services:
   - type: cron
     name: arcbond-snapshot
     env: node
-    plan: free
     buildCommand: npm install
     startCommand: node src/snapshot.js
     schedule: "0 0 * * *"  # Every day at 00:00 UTC (midnight)
@@ -25,7 +24,6 @@ services:
   - type: cron
     name: arcbond-monitor
     env: node
-    plan: free
     buildCommand: npm install
     startCommand: node src/monitor.js
     schedule: "0 * * * *"  # Every hour at :00
