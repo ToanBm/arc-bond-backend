@@ -1,0 +1,45 @@
+services:
+  # 1. Snapshot Cron Job - Records snapshots every day
+  - type: cron
+    name: arcbond-snapshot
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/snapshot.js
+    schedule: "0 0 * * *"  # Every day at 00:00 UTC (midnight)
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ARC_RPC_URL
+        value: https://rpc.testnet.arc.network
+      - key: CHAIN_ID
+        value: 5042002
+      - key: KEEPER_PRIVATE_KEY
+        sync: false
+      - key: BOND_SERIES_ADDRESS
+        value: 0xdAc987C693D28c2e5446cC51801402a24A03b0eb
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+  
+  # 2. Monitor Cron Job - Health checks every hour
+  - type: cron
+    name: arcbond-monitor
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/monitor.js
+    schedule: "0 * * * *"  # Every hour at :00
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ARC_RPC_URL
+        value: https://rpc.testnet.arc.network
+      - key: CHAIN_ID
+        value: 5042002
+      - key: KEEPER_PRIVATE_KEY
+        sync: false
+      - key: BOND_SERIES_ADDRESS
+        value: 0xdAc987C693D28c2e5446cC51801402a24A03b0eb
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+
