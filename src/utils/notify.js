@@ -38,13 +38,14 @@ export async function notifyDiscord(title, fields = [], color = 0x00ff00) {
  * Notify snapshot success
  */
 export async function notifySnapshotSuccess(recordId, totalSupply, treasuryBalance, txHash) {
-  const couponDue = (BigInt(totalSupply) * BigInt(1000)) / BigInt(1e6); // Both 6 decimals
+  // arcUSDC is 18 decimals, USDC is 6 decimals
+  const couponDue = BigInt(totalSupply) / BigInt(100) / BigInt(1e12);
   
   await notifyDiscord(
     '📸 Snapshot Recorded',
     [
       { name: 'Record ID', value: recordId.toString(), inline: true },
-      { name: 'Total Supply', value: `${(Number(totalSupply) / 1e6).toFixed(2)} arcUSDC`, inline: true },
+      { name: 'Total Supply', value: `${(Number(totalSupply) / 1e18).toFixed(2)} arcUSDC`, inline: true },
       { name: 'Treasury', value: `${(Number(treasuryBalance) / 1e6).toFixed(2)} USDC`, inline: true },
       { name: 'Coupon Due', value: `${(Number(couponDue) / 1e6).toFixed(6)} USDC`, inline: false },
       { name: 'Transaction', value: `[View on Explorer](https://testnet.arcscan.app/tx/${txHash})`, inline: false },

@@ -55,7 +55,7 @@ async function monitor() {
     
     console.log('\n📊 Series Status:');
     console.log('   Total Deposited:', ethers.formatUnits(totalDeposited, 6), 'USDC');
-    console.log('   Total Supply:', ethers.formatUnits(totalSupply, 6), 'arcUSDC');
+    console.log('   Total Supply:', ethers.formatUnits(totalSupply, 18), 'arcUSDC');
     console.log('   Record Count:', recordCount.toString());
     console.log('   Last Distributed:', lastDistributed.toString());
     console.log('   Emergency Mode:', emergencyMode ? '🚨 YES' : '✅ No');
@@ -181,7 +181,7 @@ async function monitor() {
           [
             { name: 'Status', value: 'Users can now redeem their principal', inline: false },
             { name: 'Maturity Date', value: formatTimestamp(maturityDate), inline: true },
-            { name: 'Total Supply', value: `${ethers.formatUnits(totalSupply, 6)} arcUSDC`, inline: true }
+            { name: 'Total Supply', value: `${ethers.formatUnits(totalSupply, 18)} arcUSDC`, inline: true }
           ],
           0x00ff00
         );

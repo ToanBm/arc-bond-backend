@@ -72,12 +72,12 @@ export async function recordSnapshot() {
     
     console.log('\n📸 Snapshot Recorded:');
     console.log('   Record ID:', snapshot.recordId.toString());
-    console.log('   Total Supply:', ethers.formatUnits(snapshot.totalSupply, 6), 'arcUSDC');
+    console.log('   Total Supply:', ethers.formatUnits(snapshot.totalSupply, 18), 'arcUSDC');
     console.log('   Treasury:', ethers.formatUnits(snapshot.treasuryBalance, 6), 'USDC');
     console.log('   Timestamp:', formatTimestamp(snapshot.timestamp));
     
-    // Calculate coupon due (0.001 USDC per token, both 6 decimals)
-    const couponDue = (snapshot.totalSupply * BigInt(1000)) / BigInt(1e6);
+    // Calculate coupon due: 1% of totalSupply (arcUSDC is 18 decimals, USDC is 6 decimals)
+    const couponDue = snapshot.totalSupply / BigInt(100) / BigInt(1e12);
     console.log('\n💰 Coupon Due:', ethers.formatUnits(couponDue, 6), 'USDC');
     console.log('   (Owner should distribute this amount)');
     
