@@ -16,7 +16,7 @@ services:
       - key: KEEPER_PRIVATE_KEY
         sync: false
       - key: BOND_SERIES_ADDRESS
-        value: 0xdAc987C693D28c2e5446cC51801402a24A03b0eb
+        sync: false
       - key: DISCORD_WEBHOOK_URL
         sync: false
   
@@ -37,7 +37,7 @@ services:
       - key: KEEPER_PRIVATE_KEY
         sync: false
       - key: BOND_SERIES_ADDRESS
-        value: 0xdAc987C693D28c2e5446cC51801402a24A03b0eb
+        sync: false
       - key: DISCORD_WEBHOOK_URL
         sync: false
 
